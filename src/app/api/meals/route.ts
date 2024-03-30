@@ -9,6 +9,7 @@ let submission: Omit<IMeals, "code"> = {
   country: "",
   ingredients: [],
   mealDescription: "",
+  price: 0,
 };
 
 export async function POST(request: NextRequest) {

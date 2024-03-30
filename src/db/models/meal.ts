@@ -6,6 +6,7 @@ export interface IMeals {
   country: string;
   ingredients: string[];
   mealDescription: string;
+  price: number;
 }
 
 const mealsSchema = new Schema<IMeals>(
@@ -32,6 +33,10 @@ const mealsSchema = new Schema<IMeals>(
     mealDescription: {
       type: String,
       trim: true,
+    },
+    price: {
+      type: Number,
+      required: true,
     },
   },
   {
