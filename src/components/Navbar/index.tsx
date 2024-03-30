@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -11,13 +11,15 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Avatar,
   User,
 } from "@nextui-org/react";
 import Link from "next/link";
 
+import { useUser } from "@auth0/nextjs-auth0/client";
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { user } = useUser();
 
   const menuItems = [
     { label: "Home", url: "#" },
@@ -49,30 +51,34 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>
-            <Dropdown placement="bottom-start">
-              <DropdownTrigger>
-                <User
-                  as="button"
-                  avatarProps={{
-                    isBordered: true,
-                    src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-                  }}
-                  className="transition-transform"
-                  description="@tonyreichert"
-                  name="Tony Reichert"
-                />
-              </DropdownTrigger>
-              <DropdownMenu aria-label="User Actions" variant="flat">
-                <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-bold">Signed in as</p>
-                  <p className="font-bold">@tonyreichert</p>
-                </DropdownItem>
-                <DropdownItem key="settings">Saved Meals</DropdownItem>
-                <DropdownItem key="logout" color="danger">
-                  Log Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            {user ? (
+              <Dropdown placement="bottom-start">
+                <DropdownTrigger>
+                  <User
+                    as="button"
+                    avatarProps={{
+                      isBordered: true,
+                      src: user.picture || undefined,
+                    }}
+                    className="transition-transform"
+                    description={`@${user.nickname}`}
+                    name={user.name}
+                  />
+                </DropdownTrigger>
+                <DropdownMenu aria-label="User Actions" variant="flat">
+                  <DropdownItem key="profile" className="h-14 gap-2">
+                    <p className="font-bold">Signed in as</p>
+                    <p className="font-bold">@{user.nickname}</p>
+                  </DropdownItem>
+                  <DropdownItem key="settings">Saved Meals</DropdownItem>
+                  <DropdownItem key="logout" color="danger">
+                    <Link href="/api/auth/logout">Log Out</Link>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Link href="/api/auth/login">Sign In</Link>
+            )}
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
