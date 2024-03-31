@@ -1,9 +1,28 @@
 import React, { useState } from "react";
 
-import { Select, SelectItem, Button } from "@nextui-org/react";
-import { Textarea } from "@nextui-org/react";
+import {
+  Select,
+  SelectItem,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/navigation";
 
 export default function MealGeneration() {
+  const router = useRouter();
+  const { user, isLoading } = useUser();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const countries: string[] = [
     "Bangladesh",
     "Ethipoia",
@@ -47,6 +66,7 @@ export default function MealGeneration() {
   const [err, setErr] = useState(false);
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
+  const [parsedData, setParsedData] = useState({} as any);
 
   const buttonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,6 +111,38 @@ export default function MealGeneration() {
       const data = await response.json();
       console.log("Front end response: ", data);
       setData(data.strResponse);
+      // setData(data);
+      setParsedData(JSON.parse(data.strResponse));
+    }
+  };
+
+  // Assuming parsedData has the structure:
+  // {meal: 'meal name', ingredients: ['ingredient1', 'ingredient2', ...], price: 'price of meal', description: 'description of meal'}
+
+  const saveData = async () => {
+    // Map parsedData to match the structure of the submission object
+    const mappedData = {
+      email: user ? user.email : '', // Replace with actual email if available
+      mealName: parsedData.meal,
+      country: country, // Assuming 'country' state variable holds the country value
+      ingredients: parsedData.ingredients,
+      mealDescription: parsedData.description,
+      price: parseFloat(parsedData.price), // Assuming price in parsedData is a string and needs to be converted to a number
+    };
+
+    const response = await fetch("/api/meals", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(mappedData),
+    });
+
+    if (response.ok) {
+      console.log("Success in saving meal");
+      router.push("/savedMeals");
+    } else {
+      console.error("Error saving data:", await response.text());
     }
   };
 
@@ -173,15 +225,65 @@ export default function MealGeneration() {
         </form>
       ) : (
         <>
-          <Textarea
-            isDisabled
-            label="Meal:"
-            labelPlacement="outside"
-            placeholder="Enter your description"
-            value={data}
-            className="w-full mt-10"
-          />
-          <Button type="submit" className="w-full" color="primary">
+          <Card
+            className="max-w-[400px] m-auto mt-10 mb-6"
+            isPressable
+            onPress={onOpen}
+          >
+            <CardHeader className="flex justify-center items-center p-6">
+              <div>
+                <p className="text-lg font-semibold">{parsedData.meal}</p>
+                <p className="text-sm">{country}</p>
+              </div>
+            </CardHeader>
+            <Divider />
+            <CardBody className="p-6">
+              <p className="text-sm">{parsedData.ingredients}</p>
+            </CardBody>
+            <Divider />
+            <CardFooter className="flex justify-center items-center p-6">
+              <b className="text-lg font-semibold">${parsedData.price} USD</b>
+            </CardFooter>
+          </Card>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <div>
+                  <ModalHeader className="flex flex-col gap-1">
+                    {parsedData.meal}
+                  </ModalHeader>
+                  <ModalBody>
+                    <p>{parsedData.description}</p>
+                    <p>
+                      Ingredients:{" "}
+                      {parsedData.ingredients}
+                    </p>
+                    <p>Price: ${parsedData.price} USD</p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                    <Button color="primary" onPress={saveData}>
+                      Save
+                    </Button>
+                  </ModalFooter>
+                </div>
+              )}
+            </ModalContent>
+          </Modal>
+          <Button
+            type="submit"
+            className="w-full"
+            onClick={(e) => {
+              setData("");
+              setCountry("");
+              setMeal("");
+              setYear(0);
+              setMonth(0);
+            }}
+            color="primary"
+          >
             Generate Again
           </Button>
         </>

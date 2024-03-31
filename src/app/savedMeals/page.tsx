@@ -2,7 +2,19 @@
 
 import Navbar from "@/components/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
-import { Card, CardBody, CardFooter, Input } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Input,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Button,
+} from "@nextui-org/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -10,11 +22,12 @@ import placeholder from "@/public/placeholder.jpeg";
 import { SearchIcon } from "./SearchIcon";
 
 interface Meal {
+  _id: string;
   email: string;
   mealName: string;
   country: string;
   ingredients: string[];
-  mealDescriptions: string;
+  mealDescription: string;
   price: number;
 }
 
@@ -22,6 +35,7 @@ export default function Home() {
   const [meals, setMeals] = useState<Meal[]>([]);
   const { user, isLoading } = useUser();
   const [search, setSearch] = useState("");
+  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +59,7 @@ export default function Home() {
   const filteredMeals = meals.filter((meal) =>
     meal.mealName.toLowerCase().includes(search.toLowerCase())
   );
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <NextUIProvider>
@@ -94,23 +109,48 @@ export default function Home() {
               shadow="sm"
               key={index}
               isPressable
-              onPress={() => console.log("item pressed")}
+              onPress={() => {
+                setSelectedMeal(meal);
+                onOpen();
+              }}
+              className="w-[200px] p-4"
             >
-              <CardBody className="overflow-visible p-0">
-                <Image
-                  src={placeholder}
-                  alt={meal.mealName}
-                  height={150}
-                  width={150}
-                />
+              <CardBody className="overflow-visible bg-black/50 rounded-lg text-white p-2">
+                <p className="text-center">{meal.mealName}</p>
               </CardBody>
               <CardFooter className="text-small justify-between">
-                <b>{meal.mealName}</b>
+                <b>${meal.price} USD</b>
                 <p>{meal.country}</p>
               </CardFooter>
             </Card>
           ))}
         </div>
+        {selectedMeal && (
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              {(onClose) => (
+                <div>
+                  <ModalHeader className="flex flex-col gap-1">
+                    {selectedMeal.mealName}
+                  </ModalHeader>
+                  <ModalBody>
+                    <p>{selectedMeal.mealDescription}</p>
+                    <p>Ingredients: {selectedMeal.ingredients.join(", ")}</p>
+                    <p>Price: ${selectedMeal.price} USD</p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={onClose}>
+                      Close
+                    </Button>
+                    <Button color="primary" onPress={onClose}>
+                      Remove
+                    </Button>
+                  </ModalFooter>
+                </div>
+              )}
+            </ModalContent>
+          </Modal>
+        )}
       </main>
     </NextUIProvider>
   );
