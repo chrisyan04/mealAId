@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "./globals.css";
-import { User } from "@nextui-org/react";
 
 const mont = Montserrat({
   subsets: ["latin"],
@@ -10,8 +9,8 @@ const mont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "TBD",
-  description: "Genesis Gen AI Hackathon Project",
+  title: "Meal Aid",
+  description: "Genesis Gen AI Hackathon Project - Meal Aid",
 };
 
 export default function RootLayout({
