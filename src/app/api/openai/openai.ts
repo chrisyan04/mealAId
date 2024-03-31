@@ -8,7 +8,9 @@ const openai = new OpenAI({
 
 function buildPrompt(mealDict:any){
     const prompt = ` 
-I have a few ingredients, description and price: ${mealDict}
+I have a few ingredients, description and price but also I'll first tell you the country and the meal type
+. Create a suitable meal using that data and the ingredients. Here are the ingredients and prices:
+${mealDict}
 
 I need you to return a JSON object with the following format:
 {meal: 'meal name', ingredients: ['ingredient1', 'ingredient2', ...], price: 'price of meal', description: 'description of meal'}

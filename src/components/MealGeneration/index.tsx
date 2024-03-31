@@ -85,6 +85,7 @@ export default function MealGeneration() {
       country: formData.get("country"),
       year: formData.get("year"),
       month: formData.get("month"),
+      meal: formData.get("meal"),
     };
 
     let modelResponse = await fetch(
@@ -101,7 +102,7 @@ export default function MealGeneration() {
         "Content-Type": "application/json",
         Accept: "application/json",
       }),
-      body: JSON.stringify(JSON.stringify(itemDict.modelResponse)),
+      body: JSON.stringify(formObject),
     });
 
     const response = await fetch("/api/openai");

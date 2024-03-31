@@ -1,11 +1,12 @@
 {
-  "meal": "Nutrient-Packed Lentil Stew",
-  "ingredients": [
-    "Lentils (masur)",
-    "Rice (coarse)",
-    "Oil (palm)",
-    "Wheat flour"
-  ],
-  "price": 2.81,
-  "description": "A hearty and nutritious lentil stew made with masur lentils, coarse rice for added texture, a drizzle of palm oil for healthy fats, and a hint of wheat flour to thicken the stew. This stew is rich in protein, fiber, and essential nutrients, making it a satisfying and wholesome meal option."
+    "meal": "Indonesian Breakfast Stir-Fry",
+    "ingredients": [
+        "Rice",
+        "Eggs",
+        "Onions",
+        "Oil (sunflower)",
+        "Carrots"
+    ],
+    "price": 9.04,
+    "description": "This Indonesian breakfast stir-fry is a wholesome and nutritious dish made with steamed rice, scrambled eggs, sautéed onions, carrots, and a hint of sunflower oil. The dish is rich in carbohydrates from rice, protein from eggs, and essential vitamins and fiber from the vegetables. It is a satisfying and balanced breakfast option for a healthy start to the day."
 }

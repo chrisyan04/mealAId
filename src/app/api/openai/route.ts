@@ -4,8 +4,10 @@ import  fs, { read }  from 'fs';
 
 export async function POST(request: NextRequest) {
   try {
-    //const reqItems = await request.json();
-    const reqItems = "Predictions for Meat (beef) in 2025:\
+    const userPrompts = await request.json();
+    console.log(userPrompts);
+    const reqItems = `Country: ${userPrompts.country}, Meal Type: ${userPrompts.meal}` + "\
+    Predictions for Meat (beef) in 2025:\
     2023-11-15 00:00:00: 2.170642958574295\
     2023-11-16 00:00:00: 2.170642958574295\
     Predictions for Bread (wheat) in 2025:\
