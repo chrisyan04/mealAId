@@ -1,10 +1,11 @@
 {
-    "meal": "Nutritious Lentil Stew",
-    "ingredients": [
-        "Lentils",
-        "Rice (coarse)",
-        "Wheat flour"
-    ],
-    "price": 2.00,
-    "description": "A hearty and budget-friendly lentil stew made with a blend of lentils, coarse rice, and wheat flour. Lentils provide a good source of plant-based protein, fiber, and essential minerals. Combined with the fiber-rich coarse rice and wheat flour, this stew offers a balanced and nutritious meal to keep you satisfied and full of energy."
+  "meal": "Nutrient-Packed Lentil Stew",
+  "ingredients": [
+    "Lentils (masur)",
+    "Rice (coarse)",
+    "Oil (palm)",
+    "Wheat flour"
+  ],
+  "price": 2.81,
+  "description": "A hearty and nutritious lentil stew made with masur lentils, coarse rice for added texture, a drizzle of palm oil for healthy fats, and a hint of wheat flour to thicken the stew. This stew is rich in protein, fiber, and essential nutrients, making it a satisfying and wholesome meal option."
 }

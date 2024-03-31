@@ -29,8 +29,18 @@ export async function POST(request: NextRequest) {
     Predictions for Rice (coarse, Guti Sharna) in 2025:\
     2023-11-15 00:00:00: 0.5769773926436902\
     2023-11-16 00:00:00: 0.5769773926436902"
-
-    const response:string = await getMeal(reqItems) || "";
+    let response = "";
+    while(true){
+      try{
+        response = await getMeal(reqItems) || "";
+        let tmpStr = JSON.parse(response);
+        break;
+      }
+      catch(error:any){
+        console.log("Getting new response");
+      }
+    }
+    
     console.log("\n\n\nGpt Response: ", response);
 
     fs.writeFile("gpt", response, (err:any) => {
