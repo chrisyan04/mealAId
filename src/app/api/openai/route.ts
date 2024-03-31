@@ -4,10 +4,34 @@ import  fs, { read }  from 'fs';
 
 export async function POST(request: NextRequest) {
   try {
-    const reqItems = await request.json();
-  
+    //const reqItems = await request.json();
+    const reqItems = `Predictions for Rice (coarse) in 2025:
+    2023-11-15 00:00:00: 0.5743846914023162
+    2023-11-16 00:00:00: 0.5743846914023162
+    Predictions for Oil (palm) in 2025:
+    2023-11-15 00:00:00: 0.844185166567564
+    2023-11-16 00:00:00: 0.844185166567564
+    Predictions for Wheat flour in 2025:
+    2023-11-15 00:00:00: 0.5957383689135314
+    2023-11-16 00:00:00: 0.5957383689135314
+    Predictions for Lentils (masur) in 2025:
+    2023-11-15 00:00:00: 0.7859751289188862
+    2023-11-16 00:00:00: 0.7859751289188862
+    Predictions for Rice (medium grain) in 2025:
+    2023-11-15 00:00:00: 0.6013576381504536
+    2023-11-16 00:00:00: 0.6013576381504536
+    Predictions for Rice (coarse, BR-8/ 11/, Guti Sharna) in 2025:
+    2023-11-15 00:00:00: 0.5909768600612879
+    2023-11-16 00:00:00: 0.5909768600612879
+    Predictions for Wheat in 2025:
+    2023-11-15 00:00:00: 0.5570062962025405
+    2023-11-16 00:00:00: 0.5570062962025405
+    Predictions for Rice (coarse, Guti Sharna) in 2025:
+    2023-11-15 00:00:00: 0.5769773926436902
+    2023-11-16 00:00:00: 0.5769773926436902`
+
     const response:string = await getMeal(reqItems) || "";
-    console.log("Gpt Response: ");
+    console.log("\n\n\nGpt Response: ", response);
 
     fs.writeFile("gpt", response, (err:any) => {
         if (err) {
@@ -24,7 +48,7 @@ export async function POST(request: NextRequest) {
         { status: 201 }
       );
   } catch (error: any) {
-    
+    console.log("Error: ", error);
     if (error instanceof SyntaxError) {
       return NextResponse.json(
         { type: "UnauthorizedError", error: "Invalid request" },

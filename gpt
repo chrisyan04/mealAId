@@ -1,9 +1,6 @@
-With the ingredients you have - bread, rice, strawberries, milk, and cereal - you can create a simple and nutritious breakfast option using milk and cereal. You can combine a serving of cereal with milk to create a quick and easy breakfast meal.
-
-Cost breakdown for the breakfast meal:
-- Milk: $1.8
-- Cereal: $2.3
-
-Total cost: $4.1
-
-This breakfast option provides a good balance of carbohydrates, protein, and essential nutrients to start your day.
+{
+    "meal": "Nutritious Lentil Stew",
+    "ingredients": ["Lentils (masur)", "Rice (coarse)", "Oil (palm)"],
+    "price": 2.20,
+    "country": "Predictions for 2025"
+}
