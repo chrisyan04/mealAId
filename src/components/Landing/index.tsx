@@ -8,6 +8,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Landing() {
   const { user } = useUser();
+
   return (
     <section id="landing">
       <h1 className="text-5xl font-bold text-blue-600">For those in need:</h1>
@@ -54,7 +55,6 @@ export default function Landing() {
         />
       </div>
       {user ? <Input /> : <></>}
-      {user ? <Output /> : <></>}
     </section>
   );
 }
