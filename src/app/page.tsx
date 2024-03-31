@@ -1,9 +1,12 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+
+import Landing from "@/components/Landing";
 import { NextUIProvider, button } from "@nextui-org/react";
 import { getMeal } from "@/app/api/openai/openai";
 import { model } from "mongoose";
+
 
 export default function Landing() {
   const buttonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +45,7 @@ export default function Landing() {
     <NextUIProvider>
       <Navbar />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <Landing />
         <form onSubmit={buttonClicked}>
           <button type="submit" className="btn btn-success">Click me!</button>
         </form>
