@@ -4,11 +4,10 @@ import Navbar from "@/components/Navbar";
 
 import Landing from "@/components/Landing";
 import { NextUIProvider, button } from "@nextui-org/react";
-import { getMeal } from "@/app/api/openai/openai";
 import { model } from "mongoose";
 
 
-export default function Landing() {
+export default function Home() {
   const buttonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("clicked")
