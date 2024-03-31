@@ -37,23 +37,17 @@ export default function Input() {
     "November",
     "December",
   ];
-  const years = ["2024", "2025", "2026", "2027", "2028", "2029", "2030"];
+  const years = [2024, 2025, 2026, 2027, 2028, 2029, 2030];
 
   const [country, setCountry] = useState("");
   const [meal, setMeal] = useState("");
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
+  const [year, setYear] = useState(0);
+  const [month, setMonth] = useState(0);
   const [err, setErr] = useState(false);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (
-      country == "" ||
-      meal == "" ||
-      year == "" ||
-      month == "" ||
-      month == ""
-    ) {
+    if (country == "" || meal == "" || year == 0 || month == 0) {
       setErr(true);
       return;
     }
@@ -96,11 +90,11 @@ export default function Input() {
             key="year"
             label="Year"
             placeholder="Select year"
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => setYear(Number(e.target.value))}
           >
             {years.map((year) => (
               <SelectItem key={year} value={year}>
-                {year}
+                {String(year)}
               </SelectItem>
             ))}
           </Select>
@@ -108,10 +102,10 @@ export default function Input() {
             key="month"
             label="Month"
             placeholder="Select month"
-            onChange={(e) => setMonth(e.target.value)}
+            onChange={(e) => setMonth(Number(e.target.value))}
           >
             {months.map((month) => (
-              <SelectItem key={month} value={month}>
+              <SelectItem key={month} value={months.indexOf(month) + 1}>
                 {month}
               </SelectItem>
             ))}

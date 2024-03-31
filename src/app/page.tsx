@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import Landing from "@/components/Landing";
 
-export default function Landing() {
+export default function Home() {
   return (
     <NextUIProvider>
       <Navbar />

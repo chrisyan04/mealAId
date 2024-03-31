@@ -1,6 +1,7 @@
 import React, { use } from "react";
 
 import Input from "../Input";
+import Output from "../Output";
 import { Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -53,6 +54,7 @@ export default function Landing() {
         />
       </div>
       {user ? <Input /> : <></>}
+      {user ? <Output /> : <></>}
     </section>
   );
 }
