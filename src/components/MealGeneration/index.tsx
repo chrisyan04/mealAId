@@ -181,7 +181,19 @@ export default function MealGeneration() {
             value={data}
             className="w-full mt-10"
           />
-          <Button type="submit" className="w-full" color="primary">
+          <Button
+            type="submit"
+            className="w-full mt-5 w-full"
+            onClick={(e) => {
+              setData("");
+              setLoading(false);
+              setCountry("");
+              setMonth(0);
+              setYear(0);
+              setMeal("");
+            }}
+            color="primary"
+          >
             Generate Again
           </Button>
         </>
