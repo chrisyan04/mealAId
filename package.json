@@ -2,6 +2,7 @@
   "name": "genesis",
   "version": "0.1.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,6 +20,7 @@
     "cohere-ai": "^7.9.0",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.0.24",
+    "fs": "^0.0.1-security",
     "mongoose": "^8.2.4",
     "next": "14.1.4",
     "openai": "^4.31.0",
