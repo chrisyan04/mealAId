@@ -1,10 +1,10 @@
 import React, { use } from "react";
 
-import Input from "../Input";
-import Output from "../Output";
+import Input from "../MealGeneration";
 import { Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import MealGeneration from "../MealGeneration";
 
 export default function Landing() {
   const { user } = useUser();
@@ -54,7 +54,7 @@ export default function Landing() {
           height={300}
         />
       </div>
-      {user ? <Input /> : <></>}
+      {user ? <MealGeneration /> : <></>}
     </section>
   );
 }
