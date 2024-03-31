@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Select, SelectItem, Button } from "@nextui-org/react";
+import { Textarea } from "@nextui-org/react";
 
 export default function Input() {
   const countries: string[] = [
@@ -44,6 +45,8 @@ export default function Input() {
   const [year, setYear] = useState(0);
   const [month, setMonth] = useState(0);
   const [err, setErr] = useState(false);
+  const [data, setData] = useState("With the ingredients you have - bread, rice, strawberries, milk, and cereal - you can create a simple and nutritious breakfast option using milk and cereal. You can combine a serving of cereal with milk to create a quick and easy breakfast meal. Cost breakdown for the breakfast meal: - Milk: $1.8 - Cereal: $2.3 Total cost: $4.1 This breakfast option provides a good balance of carbohydrates, protein, and essential nutrients to start your day.")
+  
 
   const buttonClicked = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,6 +76,7 @@ export default function Input() {
     }else{
       const data = await response.json();
       console.log("Front end response: ", data);
+      setData(data.strResponse);
     }
     
     
@@ -150,6 +154,9 @@ export default function Input() {
       </Button>
     </div>
     </form>
+    <div className="max-width-50">
+      <p className="w-50">{data}</p>
+    </div>
     </div>
   );
 }
