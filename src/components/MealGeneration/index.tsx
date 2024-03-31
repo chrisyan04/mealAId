@@ -122,7 +122,7 @@ export default function MealGeneration() {
   const saveData = async () => {
     // Map parsedData to match the structure of the submission object
     const mappedData = {
-      email: user ? user.email : '', // Replace with actual email if available
+      email: user ? user.email : "", // Replace with actual email if available
       mealName: parsedData.meal,
       country: country, // Assuming 'country' state variable holds the country value
       ingredients: parsedData.ingredients,
@@ -254,10 +254,7 @@ export default function MealGeneration() {
                   </ModalHeader>
                   <ModalBody>
                     <p>{parsedData.description}</p>
-                    <p>
-                      Ingredients:{" "}
-                      {parsedData.ingredients}
-                    </p>
+                    <p>Ingredients: {parsedData.ingredients}</p>
                     <p>Price: ${parsedData.price} USD</p>
                   </ModalBody>
                   <ModalFooter>
