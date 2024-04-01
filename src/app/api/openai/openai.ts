@@ -2,8 +2,10 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 dotenv.config();
 
+//@ts-nocheck
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY , // This is the default and can be omitted
+  //@ts-nocheck
+  apiKey: process.env.OPENAI_API_KEY, // This is the default and can be omitted
 });
 
 function buildPrompt(mealDict:any){
